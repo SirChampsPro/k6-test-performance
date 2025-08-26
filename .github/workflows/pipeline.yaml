@@ -14,9 +14,10 @@ jobs:
 
       - name: Install K6
         run: |
-          curl -sSL https://dl.k6.io/releases/0.46.0/k6-v0.46.0-linux-amd64.tar.gz -o k6.tar.gz
-          tar -xzf k6.tar.gz
-          sudo mv k6-v0.46.0-linux-amd64/k6 /usr/local/bin/
+          curl -s https://dl.k6.io/key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/k6-archive-keyring.gpg
+          echo "deb [signed-by=/usr/share/keyrings/k6-archive-keyring.gpg] https://dl.k6.io/deb stable main" | sudo tee /etc/apt/sources.list.d/k6.list
+          sudo apt-get update
+          sudo apt-get install -y k6
           k6 version
 
       - name: Prepare reports folder
