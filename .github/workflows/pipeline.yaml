@@ -14,8 +14,10 @@ jobs:
 
       - name: Install K6
         run: |
+          curl -s https://packagecloud.io/install/repositories/loadimpact/k6/script.deb.sh | sudo bash
           sudo apt-get update
           sudo apt-get install -y k6
+
 
       - name: Prepare reports folder
         run: mkdir -p k6-reports
