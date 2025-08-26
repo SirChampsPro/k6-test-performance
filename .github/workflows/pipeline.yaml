@@ -14,11 +14,10 @@ jobs:
 
       - name: Install K6
         run: |
-          sudo apt-get update
-          sudo apt-get install -y software-properties-common
-          sudo add-apt-repository -y ppa:grafana/stable
-          sudo apt-get update
-          sudo apt-get install -y k6
+          curl -sSL https://dl.k6.io/releases/0.46.0/k6-v0.46.0-linux-amd64.tar.gz -o k6.tar.gz
+          tar -xzf k6.tar.gz
+          sudo mv k6-v0.46.0-linux-amd64/k6 /usr/local/bin/
+          k6 version
 
       - name: Prepare reports folder
         run: mkdir -p k6-reports
