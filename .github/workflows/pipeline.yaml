@@ -14,7 +14,10 @@ jobs:
 
       - name: Install K6
         run: |
-          curl -s https://packagecloud.io/install/repositories/loadimpact/k6/script.deb.sh | sudo bash
+          sudo apt-get update
+          sudo apt-get install -y gnupg software-properties-common
+          curl -s https://packages.grafana.com/gpg.key | sudo gpg --dearmor -o /usr/share/keyrings/grafana.gpg
+          echo "deb [signed-by=/usr/share/keyrings/grafana.gpg] https://packages.grafana.com/oss/deb stable main" | sudo tee /etc/apt/sources.list.d/grafana.list
           sudo apt-get update
           sudo apt-get install -y k6
 
